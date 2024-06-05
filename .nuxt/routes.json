@@ -1,0 +1,44 @@
+[
+  {
+    "name": "AddUser",
+    "path": "/AddUser",
+    "component": "C:\\\\Users\\\\vectio\\\\test2\\\\pages\\\\AddUser.vue",
+    "chunkName": "pages/AddUser"
+  },
+  {
+    "name": "appsList",
+    "path": "/appsList",
+    "component": "C:\\\\Users\\\\vectio\\\\test2\\\\pages\\\\appsList.vue",
+    "chunkName": "pages/appsList"
+  },
+  {
+    "name": "serversList",
+    "path": "/serversList",
+    "component": "C:\\\\Users\\\\vectio\\\\test2\\\\pages\\\\serversList.vue",
+    "chunkName": "pages/serversList"
+  },
+  {
+    "name": "tasksList",
+    "path": "/tasksList",
+    "component": "C:\\\\Users\\\\vectio\\\\test2\\\\pages\\\\tasksList.vue",
+    "chunkName": "pages/tasksList"
+  },
+  {
+    "name": "users-UsersList",
+    "path": "/users/UsersList",
+    "component": "C:\\\\Users\\\\vectio\\\\test2\\\\pages\\\\users\\\\UsersList.vue",
+    "chunkName": "pages/users/UsersList"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "C:\\\\Users\\\\vectio\\\\test2\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
+  },
+  {
+    "name": "users-id",
+    "path": "/users/:id",
+    "component": "C:\\\\Users\\\\vectio\\\\test2\\\\pages\\\\users\\\\_id\\\\index.vue",
+    "chunkName": "pages/users/_id/index"
+  }
+]
