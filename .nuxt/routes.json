@@ -2,43 +2,50 @@
   {
     "name": "AddUser",
     "path": "/AddUser",
-    "component": "C:\\\\Users\\\\vectio\\\\test2\\\\pages\\\\AddUser.vue",
-    "chunkName": "pages/AddUser"
+    "component": "C:\\\\Users\\\\vectio\\\\projekt\\\\projekt\\\\pages\\\\AddUser.vue",
+    "chunkName": "pages/AddUser",
+    "_name": "_7c509cbe"
   },
   {
     "name": "appsList",
     "path": "/appsList",
-    "component": "C:\\\\Users\\\\vectio\\\\test2\\\\pages\\\\appsList.vue",
-    "chunkName": "pages/appsList"
+    "component": "C:\\\\Users\\\\vectio\\\\projekt\\\\projekt\\\\pages\\\\appsList.vue",
+    "chunkName": "pages/appsList",
+    "_name": "_433b874b"
   },
   {
     "name": "serversList",
     "path": "/serversList",
-    "component": "C:\\\\Users\\\\vectio\\\\test2\\\\pages\\\\serversList.vue",
-    "chunkName": "pages/serversList"
+    "component": "C:\\\\Users\\\\vectio\\\\projekt\\\\projekt\\\\pages\\\\serversList.vue",
+    "chunkName": "pages/serversList",
+    "_name": "_e2258efa"
   },
   {
     "name": "tasksList",
     "path": "/tasksList",
-    "component": "C:\\\\Users\\\\vectio\\\\test2\\\\pages\\\\tasksList.vue",
-    "chunkName": "pages/tasksList"
+    "component": "C:\\\\Users\\\\vectio\\\\projekt\\\\projekt\\\\pages\\\\tasksList.vue",
+    "chunkName": "pages/tasksList",
+    "_name": "_43da1fc1"
   },
   {
     "name": "users-UsersList",
     "path": "/users/UsersList",
-    "component": "C:\\\\Users\\\\vectio\\\\test2\\\\pages\\\\users\\\\UsersList.vue",
-    "chunkName": "pages/users/UsersList"
+    "component": "C:\\\\Users\\\\vectio\\\\projekt\\\\projekt\\\\pages\\\\users\\\\UsersList.vue",
+    "chunkName": "pages/users/UsersList",
+    "_name": "_ff3cd18e"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "C:\\\\Users\\\\vectio\\\\test2\\\\pages\\\\index.vue",
-    "chunkName": "pages/index"
+    "component": "C:\\\\Users\\\\vectio\\\\projekt\\\\projekt\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "_name": "_6fcf62c7"
   },
   {
     "name": "users-id",
     "path": "/users/:id",
-    "component": "C:\\\\Users\\\\vectio\\\\test2\\\\pages\\\\users\\\\_id\\\\index.vue",
-    "chunkName": "pages/users/_id/index"
+    "component": "C:\\\\Users\\\\vectio\\\\projekt\\\\projekt\\\\pages\\\\users\\\\_id\\\\index.vue",
+    "chunkName": "pages/users/_id/index",
+    "_name": "_2925b956"
   }
 ]

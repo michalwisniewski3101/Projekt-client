@@ -4,13 +4,13 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _a19d8e02 = () => interopDefault(import('..\\pages\\AddUser.vue' /* webpackChunkName: "pages/AddUser" */))
-const _0112ebad = () => interopDefault(import('..\\pages\\appsList.vue' /* webpackChunkName: "pages/appsList" */))
-const _c9503e3e = () => interopDefault(import('..\\pages\\serversList.vue' /* webpackChunkName: "pages/serversList" */))
-const _40ef479f = () => interopDefault(import('..\\pages\\tasksList.vue' /* webpackChunkName: "pages/tasksList" */))
-const _16710cca = () => interopDefault(import('..\\pages\\users\\UsersList.vue' /* webpackChunkName: "pages/users/UsersList" */))
-const _29ff29a5 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
-const _03c38d33 = () => interopDefault(import('..\\pages\\users\\_id\\index.vue' /* webpackChunkName: "pages/users/_id/index" */))
+const _7c509cbe = () => interopDefault(import('..\\pages\\AddUser.vue' /* webpackChunkName: "pages/AddUser" */))
+const _433b874b = () => interopDefault(import('..\\pages\\appsList.vue' /* webpackChunkName: "pages/appsList" */))
+const _e2258efa = () => interopDefault(import('..\\pages\\serversList.vue' /* webpackChunkName: "pages/serversList" */))
+const _43da1fc1 = () => interopDefault(import('..\\pages\\tasksList.vue' /* webpackChunkName: "pages/tasksList" */))
+const _ff3cd18e = () => interopDefault(import('..\\pages\\users\\UsersList.vue' /* webpackChunkName: "pages/users/UsersList" */))
+const _6fcf62c7 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
+const _2925b956 = () => interopDefault(import('..\\pages\\users\\_id\\index.vue' /* webpackChunkName: "pages/users/_id/index" */))
 
 const emptyFn = () => {}
 
@@ -25,31 +25,31 @@ export const routerOptions = {
 
   routes: [{
     path: "/AddUser",
-    component: _a19d8e02,
+    component: _7c509cbe,
     name: "AddUser"
   }, {
     path: "/appsList",
-    component: _0112ebad,
+    component: _433b874b,
     name: "appsList"
   }, {
     path: "/serversList",
-    component: _c9503e3e,
+    component: _e2258efa,
     name: "serversList"
   }, {
     path: "/tasksList",
-    component: _40ef479f,
+    component: _43da1fc1,
     name: "tasksList"
   }, {
     path: "/users/UsersList",
-    component: _16710cca,
+    component: _ff3cd18e,
     name: "users-UsersList"
   }, {
     path: "/",
-    component: _29ff29a5,
+    component: _6fcf62c7,
     name: "index"
   }, {
     path: "/users/:id",
-    component: _03c38d33,
+    component: _2925b956,
     name: "users-id"
   }],
 
