@@ -1,4 +1,7 @@
 {
+  "ActionButtons": {
+    "description": "Auto imported from components/ActionButtons.vue"
+  },
   "LangSwitcher": {
     "description": "Auto imported from components/langSwitcher.vue"
   },

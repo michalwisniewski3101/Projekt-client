@@ -1,3 +1,4 @@
+export { default as ActionButtons } from '../..\\components\\ActionButtons.vue'
 export { default as LangSwitcher } from '../..\\components\\langSwitcher.vue'
 export { default as NavBar } from '../..\\components\\NavBar.vue'
 

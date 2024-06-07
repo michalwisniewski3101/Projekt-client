@@ -3,28 +3,24 @@
     "name": "appsList",
     "path": "/appsList",
     "component": "C:\\\\Users\\\\vectio\\\\projekt\\\\projekt\\\\pages\\\\appsList.vue",
-    "chunkName": "pages/appsList",
-    "_name": "_433b874b"
+    "chunkName": "pages/appsList"
   },
   {
     "name": "serversList",
     "path": "/serversList",
     "component": "C:\\\\Users\\\\vectio\\\\projekt\\\\projekt\\\\pages\\\\serversList.vue",
-    "chunkName": "pages/serversList",
-    "_name": "_e2258efa"
+    "chunkName": "pages/serversList"
   },
   {
     "name": "tasksList",
     "path": "/tasksList",
     "component": "C:\\\\Users\\\\vectio\\\\projekt\\\\projekt\\\\pages\\\\tasksList.vue",
-    "chunkName": "pages/tasksList",
-    "_name": "_43da1fc1"
+    "chunkName": "pages/tasksList"
   },
   {
     "name": "index",
     "path": "/",
     "component": "C:\\\\Users\\\\vectio\\\\projekt\\\\projekt\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_6fcf62c7"
+    "chunkName": "pages/index"
   }
 ]
