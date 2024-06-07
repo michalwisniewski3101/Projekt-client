@@ -1,7 +1,5 @@
-export { default as HelloWorld } from '../..\\components\\HelloWorld.vue'
 export { default as LangSwitcher } from '../..\\components\\langSwitcher.vue'
 export { default as NavBar } from '../..\\components\\NavBar.vue'
-export { default as PopUp } from '../..\\components\\PopUp.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

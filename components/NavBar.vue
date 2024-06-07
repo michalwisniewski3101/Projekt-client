@@ -6,7 +6,7 @@
       <v-toolbar-title @click="drawer = !drawer" class="text-uppercase grey--text">
         <v-btn text color="grey" big>
         <span class="font-weight-light">      <v-icon>
-        mdi-home
+        mdi-menu
       </v-icon>
     </span>
         <span>{{$t('app.menu')}}</span></v-btn>

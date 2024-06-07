@@ -46,5 +46,6 @@ export default {
         delete: 'Usuń',
         ipAddress:'Adres IP',
         
+        
 
     }}

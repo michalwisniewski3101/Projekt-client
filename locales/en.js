@@ -1,26 +1,44 @@
 import en from 'vuetify/es5/locale/en'
 
-
-
 export default {
     $vuetify: en,
     app: {
-        user:"user",
-        database:"database",
-        signOut:"Sign Out",
+        user: "User",
+        database: "Database",
+        logOut: "Log Out",
         main: "Main",
-        home:"Home",
-        usersList:"Users List",
+        home: "Home",
+        usersList: "Users List",
         addUser: "Add User",
-        name:"Name",
-        email:"E-mail",
-        age:"Age",
-        address:"Address",
-        phone:"Phone",
-        submit:"Submit",
-
-
-
-        menu:"Menu",
-
-    }}
+        email: "E-mail",
+        age: "Age",
+        address: "Address",
+        phone: "Phone",
+        submit: "Submit",
+        menu: "Menu",
+        serverList: "Server List",
+        taskList: "Task List",
+        appList: "App List",
+        addServer: "Add Server",
+        addTask: "Add Task",
+        addApp: "Add App",
+        save: "Save",
+        addNew: "Add New",
+        edit: "Edit",
+        reset: "Reset",
+        cancel: "Cancel",
+        okay: "Okay",
+        sureDelete: "Are you sure you want to delete this item?",
+        appName: "App Name",
+        creationDate: "Creation Date",
+        editionDate: "Edition Date",
+        serverName: "Server Name",
+        taskName: "Task Name",
+        name: "Name",
+        ID: "ID",
+        actions: "Edit / Delete",
+        server: "Server",
+        delete: "Delete",
+        ipAddress: "IP Address",
+    }
+}

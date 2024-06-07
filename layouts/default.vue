@@ -10,7 +10,7 @@
 </template>
 
 <script>
-//import { RouterView } from 'vue-router';
+
 
 
 
@@ -18,7 +18,8 @@ export default {
   name: 'App',
 
   data: () => ({
-    text:"tekst"
+    text:"tekst",
+    
     
   }),
  

@@ -6,7 +6,5 @@ You can directly use them in pages and other components without the need to impo
 
 **Tip:** If a component is conditionally rendered with `v-if` and is big, it is better to use `Lazy` or `lazy-` prefix to lazy load.
 
-- `<HelloWorld>` | `<hello-world>` (components/HelloWorld.vue)
 - `<LangSwitcher>` | `<lang-switcher>` (components/langSwitcher.vue)
 - `<NavBar>` | `<nav-bar>` (components/NavBar.vue)
-- `<PopUp>` | `<pop-up>` (components/PopUp.vue)

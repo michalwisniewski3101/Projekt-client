@@ -1,14 +1,8 @@
 {
-  "HelloWorld": {
-    "description": "Auto imported from components/HelloWorld.vue"
-  },
   "LangSwitcher": {
     "description": "Auto imported from components/langSwitcher.vue"
   },
   "NavBar": {
     "description": "Auto imported from components/NavBar.vue"
-  },
-  "PopUp": {
-    "description": "Auto imported from components/PopUp.vue"
   }
 }
