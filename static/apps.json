@@ -4,69 +4,79 @@
         "creation_date": "2024-06-04 10:34:52",
         "modification_date": "2024-06-04 10:34:52",
         "id": "a1717497292565-1294",
-        "server_name": "Server5"
+        "server_name": "Server5",
+        "server_id": "s1717497048588-4351"
     },
     {
         "name": "App2",
         "creation_date": "2024-06-04 10:34:52",
         "modification_date": "2024-06-04 10:34:52",
         "id": "a1717497292565-1468",
-        "server_name": "Server4"
+        "server_name": "Server4",
+        "server_id":"s1717497048588-4350"
     },
     {
         "name": "App3",
         "creation_date": "2024-06-04 10:34:52",
         "modification_date": "2024-06-04 10:34:52",
         "id": "a1717497292565-9589",
-        "server_name": "Server4"
+        "server_name": "Server4",
+        "server_id":"s1717497048588-4350"
     },
     {
         "name": "App4",
         "creation_date": "2024-06-04 10:34:52",
         "modification_date": "2024-06-04 10:34:52",
         "id": "a1717497292565-420",
-        "server_name": "Server3"
+        "server_name": "Server3",
+        "server_id":"s1717497048588-4349"
     },
     {
         "name": "App5",
         "creation_date": "2024-06-04 10:34:52",
         "modification_date": "2024-06-04 10:34:52",
         "id": "a1717497292565-332",
-        "server_name": "Server2"
+        "server_name": "Server2",
+        "server_id":"s1717497048588-4348"
     },
     {
         "name": "App6",
         "creation_date": "2024-06-04 10:34:52",
         "modification_date": "2024-06-04 10:34:52",
         "id": "a1717497292565-9581",
-        "server_name": "Server5"
+        "server_name": "Server5",
+        "server_id":"s1717497048588-4351"
     },
     {
         "name": "App7",
         "creation_date": "2024-06-04 10:34:52",
         "modification_date": "2024-06-04 10:34:52",
         "id": "a1717497292565-2276",
-        "server_name": "Server5"
+        "server_name": "Server5",
+        "server_id":"s1717497048588-4351"
     },
     {
         "name": "App8",
         "creation_date": "2024-06-04 10:34:52",
         "modification_date": "2024-06-04 10:34:52",
         "id": "a1717497292565-5056",
-        "server_name": "Server5"
+        "server_name": "Server5",
+        "server_id":"s1717497048588-4351"
     },
     {
         "name": "App9",
         "creation_date": "2024-06-04 10:34:52",
         "modification_date": "2024-06-04 10:34:52",
         "id": "a1717497292565-3170",
-        "server_name": "Server4"
+        "server_name": "Server4",
+        "server_id":"s1717497048588-4350"
     },
     {
         "name": "App10",
         "creation_date": "2024-06-04 10:34:52",
         "modification_date": "2024-06-04 10:34:52",
         "id": "a1717497292565-5089",
-        "server_name": "Server1"
+        "server_name": "Server1",
+        "server_id":"s1717497048588-4347"
     }
 ]

@@ -7,5 +7,6 @@ You can directly use them in pages and other components without the need to impo
 **Tip:** If a component is conditionally rendered with `v-if` and is big, it is better to use `Lazy` or `lazy-` prefix to lazy load.
 
 - `<ActionButtons>` | `<action-buttons>` (components/ActionButtons.vue)
+- `<DeleteDialog>` | `<delete-dialog>` (components/DeleteDialog.vue)
 - `<LangSwitcher>` | `<lang-switcher>` (components/langSwitcher.vue)
 - `<NavBar>` | `<nav-bar>` (components/NavBar.vue)

@@ -1,107 +1,152 @@
 [
   {
-      "name": "Task1",
-      "creation_date": "2024-06-04 10:38:28",
-      "modification_date": "2024-06-04 10:38:28",
-      "id": "t1717497508348-2087",
-      "server_name": "Server3"
+    "name": "Task1",
+    "creation_date": "2024-06-04 10:38:28",
+    "modification_date": "2024-06-04 10:38:28",
+    "id": "t1717497508348-2087",
+    "server_name": "Server3",
+    "server_id": "s1717497048588-4349",
+    "app_name": "App7",
+    "app_id": "a1717497292565-2276"
   },
   {
-      "name": "Task2",
-      "creation_date": "2024-06-04 10:38:28",
-      "modification_date": "2024-06-04 10:38:28",
-      "id": "t1717497508348-5925",
-      "server_name": "Server5"
+    "name": "Task2",
+    "creation_date": "2024-06-04 10:38:28",
+    "modification_date": "2024-06-04 10:38:28",
+    "id": "t1717497508348-5925",
+    "server_name": "Server5",
+    "server_id": "s1717497048588-4351",
+    "app_name": "App3",
+    "app_id": "a1717497292565-9589"
   },
   {
-      "name": "Task3",
-      "creation_date": "2024-06-04 10:38:28",
-      "modification_date": "2024-06-04 10:38:28",
-      "id": "t1717497508348-4374",
-      "server_name": "Server3"
+    "name": "Task3",
+    "creation_date": "2024-06-04 10:38:28",
+    "modification_date": "2024-06-04 10:38:28",
+    "id": "t1717497508348-4374",
+    "server_name": "Server3",
+    "server_id": "s1717497048588-4349",
+    "app_name": "App10",
+    "app_id": "a1717497292565-5089"
   },
   {
-      "name": "Task4",
-      "creation_date": "2024-06-04 10:38:28",
-      "modification_date": "2024-06-04 10:38:28",
-      "id": "t1717497508348-9363",
-      "server_name": "Server4"
+    "name": "Task4",
+    "creation_date": "2024-06-04 10:38:28",
+    "modification_date": "2024-06-04 10:38:28",
+    "id": "t1717497508348-9363",
+    "server_name": "Server4",
+    "server_id": "s1717497048588-4350",
+    "app_name": "App1",
+    "app_id": "a1717497292565-1294"
   },
   {
-      "name": "Task5",
-      "creation_date": "2024-06-04 10:38:28",
-      "modification_date": "2024-06-04 10:38:28",
-      "id": "t1717497508348-5034",
-      "server_name": "Server1"
+    "name": "Task5",
+    "creation_date": "2024-06-04 10:38:28",
+    "modification_date": "2024-06-04 10:38:28",
+    "id": "t1717497508348-5034",
+    "server_name": "Server1",
+    "server_id": "s1717497048588-4347",
+    "app_name": "App2",
+    "app_id": "a1717497292565-1468"
   },
   {
-      "name": "Task6",
-      "creation_date": "2024-06-04 10:38:28",
-      "modification_date": "2024-06-04 10:38:28",
-      "id": "t1717497508348-2990",
-      "server_name": "Server2"
+    "name": "Task6",
+    "creation_date": "2024-06-04 10:38:28",
+    "modification_date": "2024-06-04 10:38:28",
+    "id": "t1717497508348-2990",
+    "server_name": "Server2",
+    "server_id": "s1717497048588-4348",
+    "app_name": "App8",
+    "app_id": "a1717497292565-5056"
   },
   {
-      "name": "Task7",
-      "creation_date": "2024-06-04 10:38:28",
-      "modification_date": "2024-06-04 10:38:28",
-      "id": "t1717497508348-5749",
-      "server_name": "Server2"
+    "name": "Task7",
+    "creation_date": "2024-06-04 10:38:28",
+    "modification_date": "2024-06-04 10:38:28",
+    "id": "t1717497508348-5749",
+    "server_name": "Server2",
+    "server_id": "s1717497048588-4348",
+    "app_name": "App6",
+    "app_id": "a1717497292565-9581"
   },
   {
-      "name": "Task8",
-      "creation_date": "2024-06-04 10:38:28",
-      "modification_date": "2024-06-04 10:38:28",
-      "id": "t1717497508348-6014",
-      "server_name": "Server4"
+    "name": "Task8",
+    "creation_date": "2024-06-04 10:38:28",
+    "modification_date": "2024-06-04 10:38:28",
+    "id": "t1717497508348-6014",
+    "server_name": "Server4",
+    "server_id": "s1717497048588-4350",
+    "app_name": "App4",
+    "app_id": "a1717497292565-420"
   },
   {
-      "name": "Task9",
-      "creation_date": "2024-06-04 10:38:28",
-      "modification_date": "2024-06-04 10:38:28",
-      "id": "t1717497508348-6409",
-      "server_name": "Server4"
+    "name": "Task9",
+    "creation_date": "2024-06-04 10:38:28",
+    "modification_date": "2024-06-04 10:38:28",
+    "id": "t1717497508348-6409",
+    "server_name": "Server4",
+    "server_id": "s1717497048588-4350",
+    "app_name": "App9",
+    "app_id": "a1717497292565-3170"
   },
   {
-      "name": "Task10",
-      "creation_date": "2024-06-04 10:38:28",
-      "modification_date": "2024-06-04 10:38:28",
-      "id": "t1717497508348-7981",
-      "server_name": "Server3"
+    "name": "Task10",
+    "creation_date": "2024-06-04 10:38:28",
+    "modification_date": "2024-06-04 10:38:28",
+    "id": "t1717497508348-7981",
+    "server_name": "Server3",
+    "server_id": "s1717497048588-4349",
+    "app_name": "App5",
+    "app_id": "a1717497292565-332"
   },
   {
-      "name": "Task11",
-      "creation_date": "2024-06-04 10:38:28",
-      "modification_date": "2024-06-04 10:38:28",
-      "id": "t1717497508348-5589",
-      "server_name": "Server1"
+    "name": "Task11",
+    "creation_date": "2024-06-04 10:38:28",
+    "modification_date": "2024-06-04 10:38:28",
+    "id": "t1717497508348-5589",
+    "server_name": "Server1",
+    "server_id": "s1717497048588-4347",
+    "app_name": "App1",
+    "app_id": "a1717497292565-1294"
   },
   {
-      "name": "Task12",
-      "creation_date": "2024-06-04 10:38:28",
-      "modification_date": "2024-06-04 10:38:28",
-      "id": "t1717497508348-1594",
-      "server_name": "Server2"
+    "name": "Task12",
+    "creation_date": "2024-06-04 10:38:28",
+    "modification_date": "2024-06-04 10:38:28",
+    "id": "t1717497508348-1594",
+    "server_name": "Server2",
+    "server_id": "s1717497048588-4348",
+    "app_name": "App2",
+    "app_id": "a1717497292565-1468"
   },
   {
-      "name": "Task13",
-      "creation_date": "2024-06-04 10:38:28",
-      "modification_date": "2024-06-04 10:38:28",
-      "id": "t1717497508348-5825",
-      "server_name": "Server5"
+    "name": "Task13",
+    "creation_date": "2024-06-04 10:38:28",
+    "modification_date": "2024-06-04 10:38:28",
+    "id": "t1717497508348-5825",
+    "server_name": "Server5",
+    "server_id": "s1717497048588-4351",
+    "app_name": "App3",
+    "app_id": "a1717497292565-9589"
   },
   {
-      "name": "Task14",
-      "creation_date": "2024-06-04 10:38:28",
-      "modification_date": "2024-06-04 10:38:28",
-      "id": "t1717497508348-6620",
-      "server_name": "Server3"
+    "name": "Task14",
+    "creation_date": "2024-06-04 10:38:28",
+    "modification_date": "2024-06-04 10:38:28",
+    "id": "t1717497508348-6620",
+    "server_name": "Server3",
+    "server_id": "s1717497048588-4349",
+    "app_name": "App4",
+    "app_id": "a1717497292565-420"
   },
   {
-      "name": "Task15",
-      "creation_date": "2024-06-04 10:38:28",
-      "modification_date": "2024-06-04 10:38:28",
-      "id": "t1717497508348-7392",
-      "server_name": "Server2"
+    "name": "Task15",
+    "creation_date": "2024-06-04 10:38:28",
+    "modification_date": "2024-06-04 10:38:28",
+    "id": "t1717497508348-7392",
+    "server_name": "Server2",
+    "server_id": "s1717497048588-4348",
+    "app_name": "App5",
+    "app_id": "a1717497292565-332"
   }
 ]

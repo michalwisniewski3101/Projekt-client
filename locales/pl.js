@@ -45,7 +45,9 @@ export default {
         server:'Serwer',
         delete: 'Usuń',
         ipAddress:'Adres IP',
-        
+        app_name: "Nazwa Aplikacji",
+        deleteWarning: 'Ten serwer ma {tasks} powiązane zadanie(a) i {apps} powiązane aplikacje(e). Usunięcie go spowoduje usunięcie powiązaych elementów.',
+        search: "Szukaj",
         
 
     }}

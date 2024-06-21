@@ -16,13 +16,7 @@
       
       <langSwitcher />
       <v-spacer></v-spacer>
-      <v-btn text color="grey">
-          
-        <span><v-icon>
-          mdi-logout
-      </v-icon>{{this.$t('app.logOut')}}</span>
-        
-      </v-btn>
+
     </v-app-bar>
 
     <v-navigation-drawer app v-model="drawer" class="indigo">

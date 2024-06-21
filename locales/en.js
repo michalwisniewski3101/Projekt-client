@@ -40,5 +40,8 @@ export default {
         server: "Server",
         delete: "Delete",
         ipAddress: "IP Address",
+        app_name: "App Name",
+        deleteWarning: 'This server has {tasks} associated task(s) and {apps} associated application(s). Deleting it will remove these associations.',
+        search: "Search",
     }
 }
