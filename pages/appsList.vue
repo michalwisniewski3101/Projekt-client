@@ -185,7 +185,13 @@ computed: {
     return search1Match && search2Match;
   });
 },
+
+
+
+
+
     },
+    
     created() {
     if (!this.apps.length ) {
       this.fetchData();
@@ -202,6 +208,21 @@ computed: {
       deleteItem (item) {
         this.editedIndex = this.apps.indexOf(item)
         this.editedItem = Object.assign({}, item)
+
+
+        const associatedTasks = this.tasks.filter(task => task.app_id === item.id).length;
+     
+
+      if (associatedTasks > 0 ) {
+        this.deleteWarning = this.$t('app.deleteWarning1', {
+          tasks: associatedTasks,
+        });
+      } else {
+        this.deleteWarning = '';
+      }
+
+
+
         this.dialogDelete = true
       },
 
