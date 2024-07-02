@@ -8,54 +8,31 @@ export default  {
         search2: '',
         search3: '',
         editedIndex: -1,
+        editedItemId:null,
 
         editedItem: {
             name: '',
-            creation_date: null,
-            modification_date: '-',
-            id: null,
+            
           },
           defaultItem: {
             name: '',
-            creation_date: null,
-            modification_date: '-',
-            id: null,
+            
           },
-          currentDate: null,  
+          deleteWarning: '',
+          
 
       };
     },
     computed: {
-        formattedDate() {
-            const padZero = num => (num < 10 ? '0' + num : num);
-            const year = this.currentDate.getFullYear();
-            const month = padZero(this.currentDate.getMonth() + 1);
-            const day = padZero(this.currentDate.getDate());
-            const hours = padZero(this.currentDate.getHours());
-            const minutes = padZero(this.currentDate.getMinutes());
-            const seconds = padZero(this.currentDate.getSeconds());
-            
-            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-          },
-          formTitle() {
-            return this.editedIndex === -1 ? this.$t('app.addNew') : this.$t('app.edit');
-          },
-          serverNames() {
-            return this.servers.map(server => server.name); 
-          },
 
+      formTitle() {
+        return this.editedIndex === -1 ? this.$t('app.addNew') : this.$t('app.edit');
+      },
 
         
 
     },
     methods: {
-        generateId() {
-            const timestamp = new Date().getTime();
-            const random = Math.floor(Math.random() * 10000);
-            const id = `${timestamp}-${random}`;
-            return id;
-          },
-
         close() {
             this.dialog = false;
             this.$nextTick(() => {

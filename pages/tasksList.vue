@@ -62,16 +62,20 @@
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-select
-                        v-model="editedItem.server_name"
+                        v-model="editedItem.serverId"
                         :items="serverNames"
+                        item-text="name"
+                        item-value="serverId"
                         :label="$t('app.serverName')"
                         clearable
                       ></v-select>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-select
-                        v-model="editedItem.app_name"
+                        v-model="editedItem.appId"
                         :items="appNames"
+                        item-text="name"
+                        item-value="appId"
                         :label="$t('app.appName')"
                         clearable
                       ></v-select>
@@ -113,17 +117,13 @@ export default {
   data() {
     return {
       editedItem: {
-        server_name: null,
-        server_id: null,
-        app_name:null,
-        app_id: null,
+        serverId: null,
+        appId: null,
         
       },
       defaultItem: {
-        server_name: null,
-        server_id: null,
-        app_name:null,
-        app_id: null,
+        serverId: null,
+        appId: null,
       },
     };
   },
@@ -131,7 +131,16 @@ export default {
     ...mapState('data', ['servers', 'apps', 'tasks']),
 
     appNames() {
-      return this.apps.map(app => app.name); 
+      return this.apps.map((app )=> ({
+        appId: app.id,
+        name: app.name,
+      })); 
+    },
+    serverNames() {
+      return this.servers.map((server) => ({
+        serverId: server.id,
+        name: server.name,
+      }));
     },
 
     headers() {
@@ -142,13 +151,19 @@ export default {
           sortable: true,
           value: 'name',
         },
-        { text: this.$t('app.creationDate'), value: 'creation_date' },
-        { text: this.$t('app.editionDate'), value: 'modification_date' },
-        { text: this.$t('app.server'), value: 'server_name' },
+        { text: this.$t('app.creationDate'), value: 'creationDate' },
+        { text: this.$t('app.editionDate'), value: 'modificationDate' },
+        { text: this.$t('app.server'), value: 'serverName' },
         { text: this.$t('app.ID'), value: 'id' },
-        { text: this.$t('app.app_name'), value: 'app_name' },
+        { text: this.$t('app.app_name'), value: 'appName' },
         { text: this.$t('app.actions'), value: 'actions', sortable: false },
       ];
+    },
+    serverNames() {
+      return this.servers.map((server) => ({
+        serverId: server.id,
+        name: server.name,
+      }));
     },
 
     filteredTasks() {
@@ -187,33 +202,27 @@ export default {
   methods: {
     ...mapActions('data', ['fetchData', 'addTask', 'updateTask', 'deleteTask']),
     editItem(item) {
-      this.editedIndex = this.tasks.indexOf(item);
-      this.editedItem = Object.assign({}, item);
+      
+      
       this.dialog = true;
     },
-    deleteItem(item) {
-      this.editedIndex = this.tasks.indexOf(item);
-      this.editedItem = Object.assign({}, item);
+    deleteItem(id) {
+      this.editedItemId=id;
       this.dialogDelete = true;
     },
     deleteItemConfirm() {
-      this.deleteTask(this.editedItem.id);
+      this.deleteTask(this.editedItemId);
       this.closeDelete();
     },
 
     validate() {
-      return this.editedItem.name && this.editedItem.server_name;
+      return this.editedItem.name && this.editedItem.serverId !== null;
     },
 
     save() {
       if (this.editedIndex > -1) {
-        this.currentDate = new Date();
-        this.editedItem.modification_date = this.formattedDate;
         this.updateTask(this.editedItem);
       } else {
-        this.currentDate = new Date();
-        this.editedItem.creation_date = this.formattedDate;
-        this.editedItem.id = this.generateId();
         this.addTask(this.editedItem);
       }
       this.close();

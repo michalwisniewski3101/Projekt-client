@@ -46,7 +46,7 @@
 
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.ip_address"
+                        v-model="editedItem.ipAddress"  
                         :label="$t('app.ipAddress')"
                         v-mask="'###.###.#.#'"
                         placeholder="xxx.xxx.x.x"
@@ -88,12 +88,12 @@ export default {
   data() {
     return {
       editedItem: {
-        ip_address: null,
+        ipAddress: null,
       },
       defaultItem: {
-        ip_address: null,
+        ipAddress: null,
       },
-      deleteWarning: '',
+      
     };
   },
   computed: {
@@ -107,9 +107,9 @@ export default {
           sortable: true,
           value: 'name',
         },
-        { text: this.$t('app.creationDate'), value: 'creation_date' },
-        { text: this.$t('app.editionDate'), value: 'modification_date' },
-        { text: this.$t('app.ipAddress'), value: 'ip_address' },
+        { text: this.$t('app.creationDate'), value: 'creationDate' }, 
+        { text: this.$t('app.editionDate'), value: 'modificationDate' }, 
+        { text: this.$t('app.ipAddress'), value: 'ipAddress' }, 
         { text: this.$t('app.ID'), value: 'id' },
         { text: this.$t('app.actions'), value: 'actions', sortable: false },
       ];
@@ -125,19 +125,18 @@ export default {
   methods: {
     ...mapActions('data', ['fetchData', 'deleteServer', 'updateServer', 'addServer']),
     editItem(item) {
-      this.editedIndex = this.servers.indexOf(item);
-      this.editedItem = Object.assign({}, item);
+      this.editedItem.ipAddress=item.ipAddress;
+      this.editedItem.name=item.name;
       this.dialog = true;
     },
     validate() {
-      return this.editedItem.name && this.editedItem.ip_address;
+      return this.editedItem.name && this.editedItem.ipAddress;
     },
-    deleteItem(item) {
-      this.editedIndex = this.servers.indexOf(item);
-      this.editedItem = Object.assign({}, item);
+    deleteItem(id) {
+      
 
-      const associatedTasks = this.tasks.filter(task => task.server_id === item.id).length;
-      const associatedApps = this.apps.filter(app => app.server_id === item.id).length;
+      const associatedTasks = this.tasks.filter(task => task.server_id === id).length;
+      const associatedApps = this.apps.filter(app => app.server_id === id).length;
 
       if (associatedTasks > 0 || associatedApps > 0) {
         this.deleteWarning = this.$t('app.deleteWarning', {
@@ -147,23 +146,18 @@ export default {
       } else {
         this.deleteWarning = '';
       }
-
+      this.editedItemId=id;
       this.dialogDelete = true;
     },
     deleteItemConfirm() {
-      this.deleteServer(this.editedItem.id);
+      this.deleteServer(this.editedItemId);
       this.closeDelete();
     },
 
     save() {
       if (this.editedIndex > -1) {
-        this.currentDate = new Date();
-        this.editedItem.modification_date = this.formattedDate;
         this.updateServer(this.editedItem);
       } else {
-        this.currentDate = new Date();
-        this.editedItem.creation_date = this.formattedDate;
-        this.editedItem.id = this.generateId();
         this.addServer(this.editedItem);
       }
       this.close();
