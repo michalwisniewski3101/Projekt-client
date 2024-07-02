@@ -202,8 +202,9 @@ export default {
   methods: {
     ...mapActions('data', ['fetchData', 'addTask', 'updateTask', 'deleteTask']),
     editItem(item) {
-      
-      
+      this.editedIndex=0;
+      this.editedItem.name=item.name;
+      this.editedItemId=item.id;
       this.dialog = true;
     },
     deleteItem(id) {
@@ -220,13 +221,17 @@ export default {
     },
 
     save() {
-      if (this.editedIndex > -1) {
-        this.updateTask(this.editedItem);
-      } else {
-        this.addTask(this.editedItem);
-      }
-      this.close();
-    },
+    console.log(`Edited Item:`, this.editedItem);
+    console.log(`Edited Item ID:`, this.editedItemId);
+    if (this.editedIndex > -1) {
+      this.updateTask({ task: this.editedItem, taskId: this.editedItemId });
+      this.editedIndex  -1
+    } else {
+      this.addTask(this.editedItem);
+    }
+    this.close();
+    this.fetchData();
+  },
 
   },
 

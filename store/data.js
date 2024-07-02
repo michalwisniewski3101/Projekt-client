@@ -36,10 +36,11 @@ export default {
     ADD_TASK(state, task) {
       state.tasks.push(task);
     },
-    UPDATE_TASK(state, updatedTask) {
-      const index = state.tasks.findIndex(task => task.id === updatedTask.id);
+    UPDATE_TASK(state, updatedTask, taskId) {
+      const index = state.tasks.findIndex(task => task.id === taskId);
       if (index !== -1) {
         state.tasks.splice(index, 1, updatedTask);
+        
       }
     },
     DELETE_TASK(state, taskId) {
@@ -158,10 +159,13 @@ export default {
       }
     },
 
-    async updateTask({ commit }, task) {
+    async updateTask({ commit }, { task, taskId }) {
       try {
-        const response = await axios.put(`https://localhost:7169/api/Task/${task.id}`, task);
-        commit('UPDATE_TASK', response.data);
+        console.log(`Task to update:`, task);
+        console.log(`Task ID:`, taskId);
+        const response = await axios.put(`https://localhost:7169/api/Task?id=${taskId}`, task);
+        console.log(`Response from server:`, response);
+        commit('UPDATE_TASK', response.data, taskId);
       } catch (error) {
         console.error('Error updating task:', error);
         throw error;
