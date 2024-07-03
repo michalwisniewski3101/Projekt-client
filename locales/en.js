@@ -42,7 +42,7 @@ export default {
         ipAddress: "IP Address",
         app_name: "App Name",
         deleteWarning: 'This server has {tasks} associated task(s) and {apps} associated application(s). Deleting it will remove these associations.',
-        deleteWarning1: 'This app has {tasks} associated task(s). Deleting it will remove these associations.',
+        deleteWarning1: 'This app has {tasks} associated task(s).',
         search: "Search",
     }
 }

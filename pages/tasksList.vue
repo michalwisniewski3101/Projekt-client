@@ -10,36 +10,12 @@
         <v-toolbar flat>
           <v-toolbar-title>{{ $t('app.taskList') }}</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
-          <v-text-field
-            v-model="search1"
-            density="compact"
-            :label="$t('app.search')"
-            prepend-inner-icon="mdi-magnify"
-            variant="solo-filled"
-            flat
-            hide-details
-            single-line
-          ></v-text-field>
-          <v-divider class="mx-4" inset vertical></v-divider>
-          <v-select
-            v-model="search2"
-            :items="serverNames"
-            :label="$t('app.serverName')"
-            flat
-            hide-details
-            single-line
-            clearable
-          ></v-select>
-          <v-divider class="mx-4" inset vertical></v-divider>
-          <v-select
-            v-model="search3"
-            :items="appNames"
-            :label="$t('app.appName')"
-            flat
-            hide-details
-            single-line
-            clearable
-          ></v-select>
+          <SearchField
+            v-model="searchValues"
+            :showSelect1="true"
+            :showSelect2="true"
+          />
+         
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on, attrs }">
@@ -125,23 +101,14 @@ export default {
         serverId: null,
         appId: null,
       },
+      deleteWarning: '',
+
     };
   },
   computed: {
     ...mapState('data', ['servers', 'apps', 'tasks']),
 
-    appNames() {
-      return this.apps.map((app )=> ({
-        appId: app.id,
-        name: app.name,
-      })); 
-    },
-    serverNames() {
-      return this.servers.map((server) => ({
-        serverId: server.id,
-        name: server.name,
-      }));
-    },
+
 
     headers() {
       return [
@@ -159,36 +126,20 @@ export default {
         { text: this.$t('app.actions'), value: 'actions', sortable: false },
       ];
     },
-    serverNames() {
-      return this.servers.map((server) => ({
-        serverId: server.id,
-        name: server.name,
-      }));
-    },
 
     filteredTasks() {
-  const search1 = this.search1 ? this.search1 : '';
-  const search2 = this.search2 ? this.search2 : '';
-  const search3 = this.search3 ? this.search3 : '';
+      const search1 = this.searchValues.search1 ? this.searchValues.search1.toLowerCase() : '';
+      const search2 = this.searchValues.search2 ? this.searchValues.search2 : '';
+      const search3 = this.searchValues.search3 ? this.searchValues.search3 : '';
 
   return this.tasks.filter((task) => {
-    const values = Object.values(task).map((value) =>
-      value !== null && value !== undefined ? value.toString().toLowerCase() : ''
-    );
-
-    const search1Match =
-      search1 === '' || values.some((value) => value.includes(search1.toLowerCase()));
-
-    const search2Match =
-      search2 === '' || task.server_name === search2;
-
-    const search3Match =
-      search3 === '' || task.app_name === search3;
-      
+    const search1Match = search1 === '' || task.name.toLowerCase().includes(search1);
+    const search2Match = search2 === '' || task.serverName === search2;
+    const search3Match = search3 === '' || task.appName === search3;
 
     return search1Match && search2Match && search3Match;
   });
-},
+}
 
   },
 
@@ -207,12 +158,15 @@ export default {
       this.editedItemId=item.id;
       this.dialog = true;
     },
+
     deleteItem(id) {
       this.editedItemId=id;
       this.dialogDelete = true;
     },
     deleteItemConfirm() {
-      this.deleteTask(this.editedItemId);
+      this.deleteTask(this.editedItemId).then(() => {
+      this.fetchData();
+    });
       this.closeDelete();
     },
 
@@ -221,17 +175,21 @@ export default {
     },
 
     save() {
-    console.log(`Edited Item:`, this.editedItem);
-    console.log(`Edited Item ID:`, this.editedItemId);
-    if (this.editedIndex > -1) {
-      this.updateTask({ task: this.editedItem, taskId: this.editedItemId });
-      this.editedIndex  -1
-    } else {
-      this.addTask(this.editedItem);
-    }
-    this.close();
-    this.fetchData();
-  },
+  console.log(`Edited Item:`, this.editedItem);
+  console.log(`Edited Item ID:`, this.editedItemId);
+  if (this.editedIndex > -1) {
+    this.updateTask({ task: this.editedItem, taskId: this.editedItemId }).then(() => {
+      this.fetchData();
+    });
+    this.editedIndex = -1;
+  } else {
+    this.addTask(this.editedItem).then(() => {
+      this.fetchData();
+    });
+  }
+  this.close();
+}
+
 
   },
 

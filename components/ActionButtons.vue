@@ -29,7 +29,7 @@
         this.$emit('edit-item', this.item);
       },
       deleteItem() {
-        this.$emit('delete-item', this.item.id);
+        this.$emit('delete-item', this.item);
       }
     }
   }

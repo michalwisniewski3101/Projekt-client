@@ -5,8 +5,11 @@ export default  {
         dialog: false,
         dialogDelete: false,
         search1: '',
-        search2: '',
-        search3: '',
+        searchValues: {
+          search1: '',
+          search2: '',
+          search3: '',
+        },
         editedIndex: -1,
         editedItemId:null,
 
@@ -18,7 +21,7 @@ export default  {
             name: '',
             
           },
-          deleteWarning: '',
+          
           
 
       };
@@ -27,6 +30,18 @@ export default  {
 
       formTitle() {
         return this.editedIndex === -1 ? this.$t('app.addNew') : this.$t('app.edit');
+      },
+      appNames() {
+        return this.apps.map((app) => ({
+          appId: app.id,
+          name: app.name,
+        }));
+      },
+      serverNames() {
+        return this.servers.map((server) => ({
+          serverId: server.id,
+          name: server.name,
+        }));
       },
 
         

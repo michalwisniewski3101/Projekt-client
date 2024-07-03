@@ -5,33 +5,16 @@
       :items="filteredApps"
       :items-per-page="5"
       class="elevation-1"
+      
     >
       <template v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title>{{ $t('app.appList') }}</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
-          <v-text-field
-            v-model="search1"
-            density="compact"
-            :label="$t('app.search')"
-            prepend-inner-icon="mdi-magnify"
-            variant="solo-filled"
-            flat
-            hide-details
-            single-line
-          ></v-text-field>
-          <v-divider class="mx-4" inset vertical></v-divider>
-          <v-select
-            v-model="search2"
-            :items="serverNames"
-            item-text="name"
-            item-value="server_id"
-            :label="$t('app.serverName')"
-            clearable
-            flat
-            hide-details
-            single-line
-          ></v-select>
+          <SearchField
+            v-model="searchValues"
+            :showSelect1="true"
+          />
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on, attrs }">
@@ -111,6 +94,7 @@ export default {
         serverId: null,
         
       },
+      deleteWarning: '',
 
       
     };
@@ -133,31 +117,17 @@ export default {
       ];
     },
     filteredApps() {
-      const search1 = this.search1 ? this.search1.toLowerCase() : '';
-      const search2 = this.search2 ? this.search2 : '';
+      const search1 = this.searchValues.search1 ? this.searchValues.search1.toLowerCase() : '';
+      const search2 = this.searchValues.search2 ? this.searchValues.search2 : '';
 
-      return this.apps.filter((app) => {
-        const serverName = this.servers.find((server) => server.id === app.server_id)?.name || '';
-        const values = [
-          app.name,
-          app.creationDate,
-          app.modificationDate,
-          app.serverName,
-          app.id,
-        ];
-
-        const search1Match = search1 === '' || values.some((value) => value.includes(search1));
-        const search2Match = search2 === '' || app.server_id === search2;
+return this.apps.filter((app) => {
+  const search1Match = search1 === '' || app.name.toLowerCase().includes(search1);
+  const search2Match = search2 === '' || app.serverName === search2;
 
         return search1Match && search2Match;
       });
     },
-    serverNames() {
-      return this.servers.map((server) => ({
-        serverId: server.id,
-        name: server.name,
-      }));
-    },
+
   },
   created() {
     if (!this.apps.length) {
@@ -167,43 +137,47 @@ export default {
   methods: {
     ...mapActions('data', ['fetchData', 'addApp', 'updateApp', 'deleteApp']),
     editItem(item) {
-      this.editedItem = { ...item }; 
+      this.editedIndex=0;
+      this.editedItem.name=item.name;
+
+
+      this.editedItemId=item.id;
       this.dialog = true;
     },
-    deleteItem(id) {
-      const associatedTasks = this.tasks.filter((task) => task.app_id === id).length;
+    deleteItem(item) {
+      const associatedTasks = this.tasks.filter((task) => task.appName === item.name).length;
 
       if (associatedTasks > 0) {
         this.deleteWarning = this.$t('app.deleteWarning1', { tasks: associatedTasks });
       } else {
         this.deleteWarning = '';
       }
-      this.editedItemId=id;
+      this.editedItemId=item.id;
       this.dialogDelete = true;
     },
     deleteItemConfirm() {
-      this.deleteApp(this.editedItemId);
+      this.deleteApp(this.editedItemId).then(() => {
+      this.fetchData();
+    });
       this.closeDelete();
     },
     validate() {
       return this.editedItem.name.trim() !== '' && this.editedItem.serverId !== null;
     },
     save() {
-      if (this.editedItem.id) {
-        this.updateApp({ ...this.editedItem });
-      } else {
-        this.addApp({ ...this.editedItem });
-      }
-      this.close();
-    },
-    close() {
-      this.dialog = false;
-      this.editedItem = { ...this.defaultItem };
-    },
-    closeDelete() {
-      this.dialogDelete = false;
-      this.deleteWarning = '';
-    },
+  if (this.editedIndex > -1) {
+    this.updateApp({ app: this.editedItem, appId: this.editedItemId }).then(() => {
+      this.fetchData();
+    });
+    this.editedIndex = -1;
+  } else {
+    this.addApp(this.editedItem).then(() => {
+      this.fetchData();
+    });
+  }
+  this.close();
+}
+
   },
 };
 </script>

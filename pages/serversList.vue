@@ -5,23 +5,14 @@
       :items="servers"
       :items-per-page="5"
       class="elevation-1"
-      :search="search1"
+      :search="searchValues.search1"
+
     >
       <template v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title>{{ $t('app.serverList') }}</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
-          <v-text-field
-            v-model="search1"
-            density="compact"
-            :label="$t('app.search')"
-            prepend-inner-icon="mdi-magnify"
-            variant="solo-filled"
-            flat
-            hide-details
-            single-line
-          ></v-text-field>
-          <v-divider class="mx-4" inset vertical></v-divider>
+          <SearchField v-model="searchValues" />
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on, attrs }">
@@ -93,6 +84,7 @@ export default {
       defaultItem: {
         ipAddress: null,
       },
+      deleteWarning: '',
       
     };
   },
@@ -115,6 +107,7 @@ export default {
       ];
     },
 
+
   },
 
   created() {
@@ -125,18 +118,21 @@ export default {
   methods: {
     ...mapActions('data', ['fetchData', 'deleteServer', 'updateServer', 'addServer']),
     editItem(item) {
+      this.editedIndex=0;
       this.editedItem.ipAddress=item.ipAddress;
       this.editedItem.name=item.name;
+
+      this.editedItemId=item.id;
       this.dialog = true;
     },
     validate() {
       return this.editedItem.name && this.editedItem.ipAddress;
     },
-    deleteItem(id) {
+    deleteItem(item) {
       
 
-      const associatedTasks = this.tasks.filter(task => task.server_id === id).length;
-      const associatedApps = this.apps.filter(app => app.server_id === id).length;
+      const associatedTasks = this.tasks.filter(task => task.serverName === item.name).length;
+      const associatedApps = this.apps.filter(app => app.serverName === item.name).length;
 
       if (associatedTasks > 0 || associatedApps > 0) {
         this.deleteWarning = this.$t('app.deleteWarning', {
@@ -146,23 +142,28 @@ export default {
       } else {
         this.deleteWarning = '';
       }
-      this.editedItemId=id;
+      this.editedItemId=item.id;
       this.dialogDelete = true;
     },
     deleteItemConfirm() {
-      this.deleteServer(this.editedItemId);
+      this.deleteServer(this.editedItemId).then(() => {
+      this.fetchData();
+    });
       this.closeDelete();
     },
 
     save() {
       if (this.editedIndex > -1) {
-        this.updateServer(this.editedItem);
+        this.updateServer({ server: this.editedItem, serverId: this.editedItemId }).then(() => {
+          this.fetchData();
+        });
       } else {
-        this.addServer(this.editedItem);
+        this.addServer(this.editedItem).then(() => {
+          this.fetchData();
+        });
       }
       this.close();
     },
-
   },
 };
 </script>

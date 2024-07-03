@@ -8,33 +8,39 @@ export default {
     tasks: [],
   },
   mutations: {
-    // Mutations for Servers
+    // Mutations for Set
     SET_SERVERS(state, servers) {
       state.servers = servers;
     },
-    ADD_SERVER(state, server) {
-      state.servers.push(server);
-    },
-    UPDATE_SERVER(state, updatedServer) {
-      const index = state.servers.findIndex(server => server.id === updatedServer.id);
-      if (index !== -1) {
-        state.servers.splice(index, 1, updatedServer);
-      }
-    },
-    DELETE_SERVER(state, serverId) {
-      state.servers = state.servers.filter(server => server.id !== serverId);
-    },
-
-
-
-
-
-    // Mutations for Tasks
     SET_TASKS(state, tasks) {
       state.tasks = tasks;
     },
+    SET_APPS(state, apps) {
+      state.apps = apps;
+    },
+
+
+
+
+    ADD_SERVER(state, server) {
+      state.servers.push(server);
+    },
     ADD_TASK(state, task) {
       state.tasks.push(task);
+    },
+    ADD_APP(state, app) {
+      state.apps.push(app);
+    },
+
+
+
+
+
+    UPDATE_SERVER(state, updatedServer, serverId) {
+      const index = state.servers.findIndex(server => server.id === serverId);
+      if (index !== -1) {
+        state.servers.splice(index, 1, updatedServer);
+      }
     },
     UPDATE_TASK(state, updatedTask, taskId) {
       const index = state.tasks.findIndex(task => task.id === taskId);
@@ -43,25 +49,20 @@ export default {
         
       }
     },
-    DELETE_TASK(state, taskId) {
-      state.tasks = state.tasks.filter(task => task.id !== taskId);
-    },
-
-
-
-    
-    // Mutations for Apps
-    SET_APPS(state, apps) {
-      state.apps = apps;
-    },
-    ADD_APP(state, app) {
-      state.apps.push(app);
-    },
-    UPDATE_APP(state, updatedApp) {
-      const index = state.apps.findIndex(app => app.id === updatedApp.id);
+    UPDATE_APP(state, updatedApp, appId) {
+      const index = state.apps.findIndex(app => app.id === appId);
       if (index !== -1) {
         state.apps.splice(index, 1, updatedApp);
       }
+    },
+
+
+
+    DELETE_SERVER(state, serverId) {
+      state.servers = state.servers.filter(server => server.id !== serverId);
+    },
+    DELETE_TASK(state, taskId) {
+      state.tasks = state.tasks.filter(task => task.id !== taskId);
     },
     DELETE_APP(state, appId) {
       state.apps = state.apps.filter(app => app.id !== appId);
@@ -95,16 +96,60 @@ export default {
         throw error;
       }
     },
-
-    async updateServer({ commit }, server) {
+    async addApp({ commit }, app) {
       try {
-        const response = await axios.put(`https://localhost:7169/api/Server/${server.id}`, server);
-        commit('UPDATE_SERVER', response.data);
+        const response = await axios.post('https://localhost:7169/api/App', app);
+        commit('ADD_APP', response.data);
+      } catch (error) {
+        console.error('Error adding app:', error);
+        throw error;
+      }
+    },
+    async addTask({ commit }, task) {
+      try {
+        const response = await axios.post('https://localhost:7169/api/Task', task);
+        commit('ADD_TASK', response.data);
+      } catch (error) {
+        console.error('Error adding task:', error);
+        throw error;
+      }
+    },
+
+
+
+
+
+
+    async updateServer({ commit }, {server, serverId }) {
+      try {
+        const response = await axios.put(`https://localhost:7169/api/Server?id=${serverId}`, server);
+        commit('UPDATE_SERVER', response.data, serverId);
       } catch (error) {
         console.error('Error updating server:', error);
         throw error;
       }
     },
+    async updateApp({ commit }, {app, appId })  {
+      try {
+        const response = await axios.put(`https://localhost:7169/api/App?id=${appId}`, app);
+        commit('UPDATE_APP', response.data, appId);
+      } catch (error) {
+        console.error('Error updating app:', error);
+        throw error;
+      }
+    },
+    async updateTask({ commit }, { task, taskId }) {
+      try {
+        const response = await axios.put(`https://localhost:7169/api/Task?id=${taskId}`, task);
+        commit('UPDATE_TASK', response.data, taskId);
+      } catch (error) {
+        console.error('Error updating task:', error);
+        throw error;
+      }
+    },
+
+
+
 
     async deleteServer({ commit }, serverId) {
       try {
@@ -116,28 +161,6 @@ export default {
         throw error;
       }
     },
-
-    // Actions for Apps
-    async addApp({ commit }, app) {
-      try {
-        const response = await axios.post('https://localhost:7169/api/App', app);
-        commit('ADD_APP', response.data);
-      } catch (error) {
-        console.error('Error adding app:', error);
-        throw error;
-      }
-    },
-
-    async updateApp({ commit }, app) {
-      try {
-        const response = await axios.put(`https://localhost:7169/api/App/${app.id}`, app);
-        commit('UPDATE_APP', response.data);
-      } catch (error) {
-        console.error('Error updating app:', error);
-        throw error;
-      }
-    },
-
     async deleteApp({ commit }, appId) {
       try {
         await axios.delete(`https://localhost:7169/api/App?id=${appId}`);
@@ -147,31 +170,6 @@ export default {
         throw error;
       }
     },
-
-    // Actions for Tasks
-    async addTask({ commit }, task) {
-      try {
-        const response = await axios.post('https://localhost:7169/api/Task', task);
-        commit('ADD_TASK', response.data);
-      } catch (error) {
-        console.error('Error adding task:', error);
-        throw error;
-      }
-    },
-
-    async updateTask({ commit }, { task, taskId }) {
-      try {
-        console.log(`Task to update:`, task);
-        console.log(`Task ID:`, taskId);
-        const response = await axios.put(`https://localhost:7169/api/Task?id=${taskId}`, task);
-        console.log(`Response from server:`, response);
-        commit('UPDATE_TASK', response.data, taskId);
-      } catch (error) {
-        console.error('Error updating task:', error);
-        throw error;
-      }
-    },
-
     async deleteTask({ commit }, taskId) {
       try {
         await axios.delete(`https://localhost:7169/api/Task?id=${taskId}`);
@@ -182,5 +180,6 @@ export default {
         throw error;
       }
     },
+
   },
 };
