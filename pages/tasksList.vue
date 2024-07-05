@@ -8,6 +8,7 @@
       :server-items-length="totalTasks"
       @update:page="handlePageChange"
       @update:items-per-page="handleItemsPerPageChange"
+      :footer-props="footerProps"
       class="elevation-1">
       <template v-slot:top>
         <v-toolbar flat>
@@ -110,6 +111,12 @@ export default {
       },
       getLink:'https://localhost:7169/api/Task/ExportToExcel',
       name:'ExportedTasks.xlsx',
+      footerProps: {
+        "items-per-page-options": [5, 10, 15, 20, 50, -1],
+        "items-per-page-text": this.$t("itemsPerPage"),
+        "items-per-page-all-text": this.$t("all"),
+        "pagination-text": "",
+      },
     };
   },
   computed: {

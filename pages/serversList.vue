@@ -9,7 +9,8 @@
       @update:page="handlePageChange"
       @update:items-per-page="handleItemsPerPageChange"
       class="elevation-1"
-      :search="searchValues.search1">
+      :search="searchValues.search1"
+      :footer-props="footerProps">
       <template v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title>{{ $t('app.serverList') }}</v-toolbar-title>
@@ -90,6 +91,12 @@ export default {
       },
       getLink:'https://localhost:7169/api/Server/ExportToExcel',
       name:'ExportedServers.xlsx',
+      footerProps: {
+        "items-per-page-options": [5, 10, 15, 20, 50, -1],
+        "items-per-page-text": this.$t("itemsPerPage"),
+        "items-per-page-all-text": this.$t("all"),
+        "pagination-text": "",
+      },
     };
   },
   computed: {
