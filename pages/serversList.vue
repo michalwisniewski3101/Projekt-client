@@ -3,16 +3,20 @@
     <v-data-table
       :headers="headers"
       :items="servers"
-      :items-per-page="5"
+      :items-per-page="pagination.itemsPerPage"
+      :page.sync="pagination.page"
+      :server-items-length="totalServers"
+      @update:page="handlePageChange"
+      @update:items-per-page="handleItemsPerPageChange"
       class="elevation-1"
-      :search="searchValues.search1"
-
-    >
+      :search="searchValues.search1">
       <template v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title>{{ $t('app.serverList') }}</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <SearchField v-model="searchValues" />
+          <v-spacer></v-spacer>
+          <v-btn class="green" @click="exportToExcel(getLink, name)">{{ $t('app.export') }}</v-btn>
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on, attrs }">
@@ -24,7 +28,6 @@
               <v-card-title>
                 <span class="text-h5">{{ formTitle }}</span>
               </v-card-title>
-
               <v-card-text>
                 <v-container>
                   <v-row>
@@ -34,7 +37,6 @@
                         :label="$t('app.serverName')"
                       ></v-text-field>
                     </v-col>
-
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
                         v-model="editedItem.ipAddress"  
@@ -46,7 +48,6 @@
                   </v-row>
                 </v-container>
               </v-card-text>
-
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="close">
@@ -71,10 +72,8 @@
     </v-data-table>
   </v-app>
 </template>
-
 <script>
 import { mapState, mapActions } from 'vuex';
-
 export default {
   data() {
     return {
@@ -85,12 +84,16 @@ export default {
         ipAddress: null,
       },
       deleteWarning: '',
-      
+      pagination: {
+        page: 1,
+        itemsPerPage: 5,
+      },
+      getLink:'https://localhost:7169/api/Server/ExportToExcel',
+      name:'ExportedServers.xlsx',
     };
   },
   computed: {
-    ...mapState('data', ['servers', 'apps', 'tasks']),
-
+    ...mapState('data', ['servers','totalServers', 'apps', 'tasks']),
     headers() {
       return [
         {
@@ -106,17 +109,14 @@ export default {
         { text: this.$t('app.actions'), value: 'actions', sortable: false },
       ];
     },
-
-
   },
-
   created() {
     if (!this.servers.length) {
       this.fetchData();
     }
   },
   methods: {
-    ...mapActions('data', ['fetchData', 'deleteServer', 'updateServer', 'addServer']),
+    ...mapActions('data', ['fetchDataAction', 'deleteServer', 'updateServer', 'addServer']),
     editItem(item) {
       this.editedIndex=0;
       this.editedItem.ipAddress=item.ipAddress;
@@ -129,11 +129,8 @@ export default {
       return this.editedItem.name && this.editedItem.ipAddress;
     },
     deleteItem(item) {
-      
-
       const associatedTasks = this.tasks.filter(task => task.serverName === item.name).length;
       const associatedApps = this.apps.filter(app => app.serverName === item.name).length;
-
       if (associatedTasks > 0 || associatedApps > 0) {
         this.deleteWarning = this.$t('app.deleteWarning', {
           tasks: associatedTasks,
@@ -151,7 +148,6 @@ export default {
     });
       this.closeDelete();
     },
-
     save() {
       if (this.editedIndex > -1) {
         this.updateServer({ server: this.editedItem, serverId: this.editedItemId }).then(() => {
@@ -167,7 +163,6 @@ export default {
   },
 };
 </script>
-
 <style>
 h1 {
   text-align: center;

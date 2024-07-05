@@ -49,6 +49,7 @@ export default {
         deleteWarning: 'Ten serwer ma {tasks} powiązane zadanie(a) i {apps} powiązane aplikacje(e). Usunięcie jej spowoduje usunięcie powiązaych elementów.',
         deleteWarning1: 'Ta aplikacja ma {tasks} powiązane zadanie(a).',
         search: "Szukaj",
+        export:"Eksportuj do Excela"
         
 
     }}

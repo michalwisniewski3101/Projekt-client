@@ -83,7 +83,7 @@ export default {
     },
   },
   computed: {
-    ...mapState('data', ['servers', 'apps']),
+    ...mapState('data', ['servers', 'apps','appNames', 'serverNames']),
 
 
   },

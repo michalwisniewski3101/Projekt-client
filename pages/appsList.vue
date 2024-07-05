@@ -3,18 +3,21 @@
     <v-data-table
       :headers="headers"
       :items="filteredApps"
-      :items-per-page="5"
-      class="elevation-1"
-      
-    >
+      :items-per-page="pagination.itemsPerPage"
+      :page.sync="pagination.page"
+      :server-items-length="totalApps"
+      @update:page="handlePageChange"
+      @update:items-per-page="handleItemsPerPageChange"
+      class="elevation-1">
       <template v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title>{{ $t('app.appList') }}</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <SearchField
             v-model="searchValues"
-            :showSelect1="true"
-          />
+            :showSelect1="true"/>
+          <v-spacer></v-spacer>
+          <v-btn class="green" @click="exportToExcel(getLink, name)">{{ $t('app.export') }}</v-btn>
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on, attrs }">
@@ -40,7 +43,7 @@
                         v-model="editedItem.serverId"
                         :items="serverNames"
                         item-text="name"
-                        item-value="serverId"
+                        item-value="id"
                         :label="$t('app.serverName')"
                         clearable
                       ></v-select>
@@ -57,8 +60,7 @@
                   color="blue darken-1"
                   text
                   @click="save"
-                  :disabled="!validate()"
-                >
+                  :disabled="!validate()">
                   {{$t('app.save')}}
                 </v-btn>
               </v-card-actions>
@@ -68,8 +70,7 @@
             :visible.sync="dialogDelete"
             :deleteWarning="deleteWarning"
             @close="closeDelete"
-            @confirm="deleteItemConfirm"
-          />
+            @confirm="deleteItemConfirm"/>
         </v-toolbar>
       </template>
       <template v-slot:[`item.actions`]="{ item }">
@@ -78,29 +79,29 @@
     </v-data-table>
   </v-app>
 </template>
-
 <script>
 import { mapState, mapActions } from 'vuex';
-
 export default {
   name: 'App',
   data() {
     return {
       editedItem: {
         serverId: null,
-        
       },
       defaultItem: {
         serverId: null,
-        
       },
       deleteWarning: '',
-
-      
+      pagination: {
+        page: 1,
+        itemsPerPage: 5,
+      },
+      getLink:'https://localhost:7169/api/App/ExportToExcel',
+      name:'ExportedApps.xlsx',
     };
   },
   computed: {
-    ...mapState('data', ['servers', 'apps', 'tasks']),
+    ...mapState('data', ['servers', 'apps','totalApps', 'tasks', 'serverNames']),
     headers() {
       return [
         {
@@ -119,15 +120,12 @@ export default {
     filteredApps() {
       const search1 = this.searchValues.search1 ? this.searchValues.search1.toLowerCase() : '';
       const search2 = this.searchValues.search2 ? this.searchValues.search2 : '';
-
 return this.apps.filter((app) => {
   const search1Match = search1 === '' || app.name.toLowerCase().includes(search1);
   const search2Match = search2 === '' || app.serverName === search2;
-
         return search1Match && search2Match;
       });
     },
-
   },
   created() {
     if (!this.apps.length) {
@@ -135,18 +133,15 @@ return this.apps.filter((app) => {
     }
   },
   methods: {
-    ...mapActions('data', ['fetchData', 'addApp', 'updateApp', 'deleteApp']),
+    ...mapActions('data', ['fetchDataAction', 'addApp', 'updateApp', 'deleteApp']),
     editItem(item) {
       this.editedIndex=0;
       this.editedItem.name=item.name;
-
-
       this.editedItemId=item.id;
       this.dialog = true;
     },
     deleteItem(item) {
       const associatedTasks = this.tasks.filter((task) => task.appName === item.name).length;
-
       if (associatedTasks > 0) {
         this.deleteWarning = this.$t('app.deleteWarning1', { tasks: associatedTasks });
       } else {
@@ -176,12 +171,10 @@ return this.apps.filter((app) => {
     });
   }
   this.close();
-}
-
+  },
   },
 };
 </script>
-
 <style>
 h1 {
   text-align: center;

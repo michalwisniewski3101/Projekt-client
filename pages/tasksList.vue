@@ -3,9 +3,12 @@
     <v-data-table
       :headers="headers"
       :items="filteredTasks"
-      :items-per-page="5"
-      class="elevation-1"
-    >
+      :items-per-page="pagination.itemsPerPage"
+      :page.sync="pagination.page"
+      :server-items-length="totalTasks"
+      @update:page="handlePageChange"
+      @update:items-per-page="handleItemsPerPageChange"
+      class="elevation-1">
       <template v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title>{{ $t('app.taskList') }}</v-toolbar-title>
@@ -13,9 +16,9 @@
           <SearchField
             v-model="searchValues"
             :showSelect1="true"
-            :showSelect2="true"
-          />
-         
+            :showSelect2="true"/>
+          <v-spacer></v-spacer>
+          <v-btn class="green" @click="exportToExcel(getLink, name)">{{ $t('app.export') }}</v-btn>
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on, attrs }">
@@ -41,7 +44,7 @@
                         v-model="editedItem.serverId"
                         :items="serverNames"
                         item-text="name"
-                        item-value="serverId"
+                        item-value="id"
                         :label="$t('app.serverName')"
                         clearable
                       ></v-select>
@@ -51,7 +54,7 @@
                         v-model="editedItem.appId"
                         :items="appNames"
                         item-text="name"
-                        item-value="appId"
+                        item-value="id"
                         :label="$t('app.appName')"
                         clearable
                       ></v-select>
@@ -95,21 +98,22 @@ export default {
       editedItem: {
         serverId: null,
         appId: null,
-        
       },
       defaultItem: {
         serverId: null,
         appId: null,
       },
       deleteWarning: '',
-
+      pagination: {
+        page: 1,
+        itemsPerPage: 5,
+      },
+      getLink:'https://localhost:7169/api/Task/ExportToExcel',
+      name:'ExportedTasks.xlsx',
     };
   },
   computed: {
-    ...mapState('data', ['servers', 'apps', 'tasks']),
-
-
-
+    ...mapState('data', ['servers', 'apps','totalTasks', 'tasks','appNames', 'serverNames' ]),
     headers() {
       return [
         {
@@ -126,39 +130,31 @@ export default {
         { text: this.$t('app.actions'), value: 'actions', sortable: false },
       ];
     },
-
     filteredTasks() {
       const search1 = this.searchValues.search1 ? this.searchValues.search1.toLowerCase() : '';
       const search2 = this.searchValues.search2 ? this.searchValues.search2 : '';
       const search3 = this.searchValues.search3 ? this.searchValues.search3 : '';
-
   return this.tasks.filter((task) => {
     const search1Match = search1 === '' || task.name.toLowerCase().includes(search1);
     const search2Match = search2 === '' || task.serverName === search2;
     const search3Match = search3 === '' || task.appName === search3;
-
     return search1Match && search2Match && search3Match;
   });
 }
-
   },
-
   created() {
     if (!this.tasks.length ) {
       this.fetchData();
     }
   },
-
-
   methods: {
-    ...mapActions('data', ['fetchData', 'addTask', 'updateTask', 'deleteTask']),
+    ...mapActions('data', ['fetchDataAction', 'addTask', 'updateTask', 'deleteTask']),
     editItem(item) {
       this.editedIndex=0;
       this.editedItem.name=item.name;
       this.editedItemId=item.id;
       this.dialog = true;
     },
-
     deleteItem(id) {
       this.editedItemId=id;
       this.dialogDelete = true;
@@ -169,11 +165,9 @@ export default {
     });
       this.closeDelete();
     },
-
     validate() {
       return this.editedItem.name && this.editedItem.serverId !== null;
     },
-
     save() {
   console.log(`Edited Item:`, this.editedItem);
   console.log(`Edited Item ID:`, this.editedItemId);
@@ -188,14 +182,10 @@ export default {
     });
   }
   this.close();
-}
-
-
+},
   },
-
 };
 </script>
-
 <style>
 h1 {
   text-align: center;

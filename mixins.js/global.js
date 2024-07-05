@@ -9,7 +9,10 @@ export default  {
           search1: '',
           search2: '',
           search3: '',
+          
         },
+        pageNumber:1,
+        pageSize:3,
         editedIndex: -1,
         editedItemId:null,
 
@@ -31,18 +34,7 @@ export default  {
       formTitle() {
         return this.editedIndex === -1 ? this.$t('app.addNew') : this.$t('app.edit');
       },
-      appNames() {
-        return this.apps.map((app) => ({
-          appId: app.id,
-          name: app.name,
-        }));
-      },
-      serverNames() {
-        return this.servers.map((server) => ({
-          serverId: server.id,
-          name: server.name,
-        }));
-      },
+
 
         
 
@@ -62,6 +54,30 @@ export default  {
               this.editedItem = Object.assign({}, this.defaultItem);
               this.editedIndex = -1;
             });
+          },
+          fetchData() {
+            this.fetchDataAction({
+              pageNumber: this.pagination.page,
+              pageSize: this.pagination.itemsPerPage,
+            });
+          },
+          handleItemsPerPageChange(newItemsPerPage) {
+            this.pagination.itemsPerPage = newItemsPerPage;
+            this.pagination.page = 1; // Reset to first page
+            this.fetchData();
+          },
+          handlePageChange(newPage) {
+            this.pagination.page = newPage;
+            this.fetchData();
+          },
+          async exportToExcel(getLink, name) {
+            const response = await this.$axios.$get(getLink, { responseType: 'blob' });
+            const url = window.URL.createObjectURL(new Blob([response]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', name);
+            document.body.appendChild(link);
+            link.click();
           },
 
           

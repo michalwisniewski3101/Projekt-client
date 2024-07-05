@@ -4,19 +4,37 @@ export default {
   namespaced: true,
   state: {
     servers: [],
+    totalServers: 0,
+    totalTasks: 0,
+    totalApps: 0,
     apps: [],
     tasks: [],
+    appNames:[],
+    serverNames:[],
+
+
+    
   },
   mutations: {
     // Mutations for Set
-    SET_SERVERS(state, servers) {
-      state.servers = servers;
+    SET_SERVERS(state, data) {
+      state.servers = data.items;
+      state.totalServers = data.totalItems;
+      
     },
-    SET_TASKS(state, tasks) {
-      state.tasks = tasks;
+    SET_TASKS(state, data) {
+      state.tasks = data.items;
+      state.totalTasks = data.totalItems;
     },
-    SET_APPS(state, apps) {
-      state.apps = apps;
+    SET_APPS(state, data) {
+      state.apps = data.items;
+      state.totalApps = data.totalItems;
+    },
+    SET_APP_NAMES(state, appNames) {
+      state.appNames = appNames;
+    },
+    SET_SERVER_NAMES(state, serverNames) {
+      state.serverNames = serverNames;
     },
 
 
@@ -71,15 +89,19 @@ export default {
 
   actions: {
     // Action to fetch all initial data
-    async fetchData({ commit }) {
+    async fetchDataAction({ commit }, {pageNumber, pageSize}) {
       try {
-        const serversResponse = await axios.get('https://localhost:7169/api/Server');
-        const appsResponse = await axios.get('https://localhost:7169/api/App');
-        const tasksResponse = await axios.get('https://localhost:7169/api/Task');
+        const serversResponse = await axios.get(`https://localhost:7169/api/Server/paginated?pageNumber=${pageNumber}&pageSize=${pageSize}`);
+        const appsResponse = await axios.get(`https://localhost:7169/api/App/paginated?pageNumber=${pageNumber}&pageSize=${pageSize}`);
+        const tasksResponse = await axios.get(`https://localhost:7169/api/Task/paginated?pageNumber=${pageNumber}&pageSize=${pageSize}`);
+        const appFilterResponse = await axios.get('https://localhost:7169/api/App/GetAppFilterData');
+        const serverFilterResponse = await axios.get('https://localhost:7169/api/Server/GetServerFilterData');
 
         commit('SET_SERVERS', serversResponse.data);
         commit('SET_APPS', appsResponse.data);
         commit('SET_TASKS', tasksResponse.data);
+        commit('SET_SERVER_NAMES', serverFilterResponse.data);
+        commit('SET_APP_NAMES', appFilterResponse.data);
       } catch (error) {
         console.error('Error fetching data:', error);
         throw error; // Re-throw the error to propagate it to the calling code
